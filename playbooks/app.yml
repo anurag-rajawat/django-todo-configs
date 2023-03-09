@@ -1,0 +1,37 @@
+---
+- hosts: dev
+  name: Start app
+  gather_facts: false
+  vars:
+    project_path: "django-todo"
+    env_src: "../.env"
+  tasks:
+    - name: Clone repo
+      ansible.builtin.git:
+        repo: https://github.com/anurag-rajawat/django-todo.git
+        dest: "{{  project_path }}"
+        version: main
+        force: true
+
+    - name: Copy .env file
+      ansible.builtin.copy:
+        src: "{{ env_src }}"
+        dest: "{{ project_path }}/.env"
+        mode: '0644'
+
+    - name: Build app container image
+      community.docker.docker_image:
+        name: todo-app:1.0
+        build:
+          path: "{{ project_path }}"
+        source: build
+
+    - name: Start app container
+      community.docker.docker_container:
+        name: todo-app
+        image: todo-app:1.0
+        env_file: "{{ project_path }}/.env"
+        state: started
+        restart: true
+        ports:
+          - "80:8000"
