@@ -23,4 +23,3 @@ The goal is to configure web server to run our app using [Ansible](https://www.a
 
 - CORS policy related
   - For chrome, disable `Block insecure private network requests` flag, to do so head over to `chrome://flags/#block-insecure-private-network-requests`
-  wait 2-3 minutes and try again.
