@@ -7,12 +7,12 @@ The goal is to configure web server to run our app using [Ansible](https://www.a
 - Create a ubuntu web-server instance on any cloud provider
 - Allow HTTP (port 80) traffic on your instance
 - Update instance details in [hosts](inventory/hosts) file
-- Run [docker](playbooks/docker.yml) playbook to install docker on instance
+- Execute [docker](playbooks/docker.yml) playbook to install docker on instance
 
     ```shell
     $ ansible-playbook playbooks/docker.yml
     ```
-- Run [app](playbooks/app.yml) playbook to start app on instance
+- Execute [app](playbooks/app.yml) playbook to start app on instance
 
     ```shell
     $ ansible-playbook playbooks/app.yml
